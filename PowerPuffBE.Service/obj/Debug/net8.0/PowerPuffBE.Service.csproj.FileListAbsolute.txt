@@ -1,0 +1,5 @@
+C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Service\obj\Debug\net8.0\PowerPuffBE.Service.csproj.AssemblyReference.cache
+C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Service\obj\Debug\net8.0\PowerPuffBE.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Service\obj\Debug\net8.0\PowerPuffBE.Service.AssemblyInfoInputs.cache
+C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Service\obj\Debug\net8.0\PowerPuffBE.Service.AssemblyInfo.cs
+C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Service\obj\Debug\net8.0\PowerPuffBE.Service.csproj.CoreCompileInputs.cache
