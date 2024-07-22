@@ -16,7 +16,5 @@ public class PowerPuffDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<ReactorProductionChecksEntity>().HasOne(prdC => prdC.Reactor)
-            .WithMany().HasForeignKey(r => r.ReactorId).OnDelete(DeleteBehavior.NoAction);
     }
 }

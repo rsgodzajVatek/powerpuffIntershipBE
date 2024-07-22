@@ -9,7 +9,7 @@ public interface IReactorMapper
     ReactorDTO MapToDTO(ReactorEntity entity);
     IEnumerable<ReactorDTO> MapListToDTO(List<ReactorEntity> entityList);
     ReactorDTO MapToDTOWithDetails(ReactorEntity entity);
-    IEnumerable<ReactorDTO> MapListToDTOWithDetails(List<ReactorEntity> entityList);
+    ReactorDTO MapToDTOWithImage(ReactorEntity reactor,ImageEntity image);
 }
 
 public class ReactorMapper : IReactorMapper
@@ -60,8 +60,14 @@ public class ReactorMapper : IReactorMapper
         };
     }
 
-    public IEnumerable<ReactorDTO> MapListToDTOWithDetails(List<ReactorEntity> entityList)
+    public ReactorDTO MapToDTOWithImage(ReactorEntity reactor, ImageEntity image)
     {
-        return entityList.Select(x => MapToDTOWithDetails(x));
+        return new ReactorDTO()
+        {
+            Id = reactor.Id,
+            Name = reactor.Name,
+            Description = reactor.Description,
+            ImageContent = image == null ? "No image found" : "data:image/png;base64," + Convert.ToBase64String(image.Image)
+        };
     }
 }

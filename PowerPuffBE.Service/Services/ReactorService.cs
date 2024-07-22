@@ -8,17 +8,23 @@ public interface IReactorService
 {
     Task<IEnumerable<ReactorDTO>> GetAllReactors();
     Task<ReactorDTO> GetReactorWithDetails(Guid reactorId);
+    Task<IEnumerable<ReactorDTO>> GetReactorWithImageList();
 }
 
 public class ReactorService : IReactorService
 {
     private readonly IReactorRepository _reactorRepository;
     private readonly IReactorMapper _reactorMapper;
+    private readonly IImageRepository _imageRepository;
 
-    public ReactorService(IReactorRepository reactorRepository, IReactorMapper reactorMapper)
+    public ReactorService(
+        IReactorRepository reactorRepository,
+        IReactorMapper reactorMapper,
+        IImageRepository imageRepository)
     {
         _reactorRepository = reactorRepository;
         _reactorMapper = reactorMapper;
+        _imageRepository = imageRepository;
     }
 
     public async Task<IEnumerable<ReactorDTO>> GetAllReactors()
@@ -31,5 +37,19 @@ public class ReactorService : IReactorService
     {
         var reactor = await _reactorRepository.GetReactorExtendedById(reactorId);
         return _reactorMapper.MapToDTOWithDetails(reactor);
+    }
+
+    public async Task<IEnumerable<ReactorDTO>> GetReactorWithImageList()
+    {
+        var returnDtoList = new List<ReactorDTO>();
+        var reactorsWithImages = await _reactorRepository.GetReactorImageList();
+        var images = await _imageRepository.GetImages();
+        foreach (var reactor in reactorsWithImages)
+        {
+            returnDtoList.Add(_reactorMapper.MapToDTOWithImage(reactor,
+                images.FirstOrDefault(i => i.Id.Equals(reactor.ImageId))));
+        }
+
+        return returnDtoList;
     }
 }

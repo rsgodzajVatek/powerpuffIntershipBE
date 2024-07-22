@@ -12,3 +12,4 @@ C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Data\obj\Debug\net8.0\refint\Power
 C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Data\obj\Debug\net8.0\PowerPuffBE.Data.pdb
 C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Data\obj\Debug\net8.0\PowerPuffBE.Data.genruntimeconfig.cache
 C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Data\obj\Debug\net8.0\ref\PowerPuffBE.Data.dll
+C:\ROBERT\PowerPuffBE\PowerPuffBE\PowerPuffBE.Data\obj\Debug\net8.0\PowerPuffBE.Data.sourcelink.json
