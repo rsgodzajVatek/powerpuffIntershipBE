@@ -16,6 +16,12 @@ builder.Services.AddDbContext<PowerPuffDbContext>(options =>
 
 var app = builder.Build();
 
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<PowerPuffDbContext>();
+    context.Database.Migrate();
+}
+
 //Database Seed
 ServicesContainer.SeedDatabase(app);
 
