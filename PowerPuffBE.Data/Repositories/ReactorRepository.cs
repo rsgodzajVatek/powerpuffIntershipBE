@@ -38,6 +38,7 @@ public class ReactorRepository : IReactorRepository
     public async Task<ReactorEntity> GetReactorExtendedById(Guid id)
     {
         return await _context.Reactors
+            .Include(r => r.ProductionChecks)
             .FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
