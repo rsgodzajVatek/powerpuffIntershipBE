@@ -38,26 +38,7 @@ public class ReactorMapper : IReactorMapper
             Id = entity.Id,
             Description = entity.Description,
             Name = entity.Name,
-            Status = ((ReactorStatusEnum)entity.Status).ToString().ToLower(),
-            Reactorcoretemperature = entity.ProductionChecks.Select(pc =>
-            {
-                return new ReactorChartDTO()
-                {
-                    Time = pc.MeasureTime.Ticks,
-                    Value = pc.Temperature,
-                    //Status = metoda do kalkulacji statusow
-                };
-            }),
-            Reactorpowerproduction = entity.ProductionChecks.Select(pc =>
-            {
-                return new ReactorChartDTO()
-                {
-                    Time = pc.MeasureTime.Ticks,
-                    Value = pc.PowerProduction,
-                    //Status = metoda do kalkulacji statusow
-                };
-            }),
-            //Links = generowac linki , poki co hardcoded 
+            Status = ((ReactorStatusEnum)entity.Status).ToString().ToLower()
         };
     }
 

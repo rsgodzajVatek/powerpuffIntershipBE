@@ -25,7 +25,8 @@ public class ImageController : ControllerBase
 
     [HttpPost]
     [Route("upload")]
-    public async Task<IActionResult> UploadImage([FromForm] IFormFile imageFile)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadImage(IFormFile imageFile)
     {
         if (imageFile == null || imageFile.Length == 0)
             return BadRequest("File not send.");
@@ -45,20 +46,21 @@ public class ImageController : ControllerBase
     
     [HttpPost]
     [Route("upload-reactor/{id}")]
-    public async Task<IActionResult> UploadReactorImage([FromRoute] Guid id, [FromForm] IFormFile imageFile)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadReactorImage([FromForm] UploadImageForReactorApiDTO uploadImageForReactorApiDTO)
     {
-        if (imageFile == null || imageFile.Length == 0)
+        if (uploadImageForReactorApiDTO.Image == null || uploadImageForReactorApiDTO.Image.Length == 0)
             return BadRequest("File not send.");
 
         byte[] imageData;
 
         using (var ms = new MemoryStream())
         {
-            await imageFile.CopyToAsync(ms);
+            await uploadImageForReactorApiDTO.Image.CopyToAsync(ms);
             imageData = ms.ToArray();
         }
 
-        await _imageService.UploadForReactor(id, imageFile.Name ,imageData);
+        await _imageService.UploadForReactor(uploadImageForReactorApiDTO.ReactorId, uploadImageForReactorApiDTO.Image.Name ,imageData);
         return Ok();
     }
 }
