@@ -3,6 +3,7 @@
 using Data.Repositories;
 using Mappers;
 using Model;
+using PowerPuffBE.Data.Entities;
 
 public interface IReactorService
 {
@@ -30,13 +31,27 @@ public class ReactorService : IReactorService
     public async Task<IEnumerable<ReactorDTO>> GetAllReactors(bool extended = false)
     {
         var reactors = await _reactorRepository.GetAllReactors(true);
-        return _reactorMapper.MapListToDTO(reactors.ToList());
+        reactors.ToList();
+
+        List<Tuple<ReactorEntity, ImageEntity>> entityTupleList = new List<Tuple<ReactorEntity, ImageEntity>>();
+
+        foreach (var reactor in reactors)
+        {
+            var image = await _imageRepository.GetImageById(reactor.ImageId);
+            Tuple<ReactorEntity, ImageEntity> tuple = new Tuple<ReactorEntity, ImageEntity>(reactor, image);
+            entityTupleList.Add(tuple);
+        }
+
+        return _reactorMapper.MapListToDTO(entityTupleList);
     }
 
     public async Task<ReactorDTO> GetReactorWithDetails(Guid reactorId)
     {
         var reactor = await _reactorRepository.GetReactorExtendedById(reactorId);
-        return _reactorMapper.MapToDTOWithDetails(reactor);
+
+        var image = await _imageRepository.GetImageById(reactor.ImageId);
+
+        return _reactorMapper.MapToDTOWithDetails(new Tuple<ReactorEntity,ImageEntity>(reactor,image));
     }
 
     public async Task<IEnumerable<ReactorDTO>> GetReactorWithImageList()

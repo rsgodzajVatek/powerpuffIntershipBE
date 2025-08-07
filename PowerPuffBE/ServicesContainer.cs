@@ -2,6 +2,7 @@
 
 using Data;
 using Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Service.Mappers;
 using Service.Services;
 
@@ -11,9 +12,11 @@ public static class ServicesContainer
     {
         services.AddScoped<IImageRepository, ImageRepository>();
         services.AddScoped<IReactorRepository, ReactorRepository>();
+        services.AddScoped<IReactorLocationRepository, ReactorLocationRepository>();
         services.AddScoped<IImageService, ImageService>();
         services.AddScoped<IReactorService, ReactorService>();
         services.AddScoped<IReactorMapper, ReactorMapper>();
+        services.AddScoped<IReactorLocationService, ReactorLocationService>();
     }
 
     public static void SeedDatabase(WebApplication app)
@@ -35,6 +38,14 @@ public static class ServicesContainer
                 var reactors = context.Reactors.ToList();
                 var productionChecks = DataSeed.SeedProductionChecks(reactors);
                 context.ReactorProductionChecks.AddRange(productionChecks);
+                context.SaveChanges();
+            }
+
+            if (!context.Locations.Any())
+            {
+                var reactors = context.Reactors.ToList();
+                var locations = DataSeed.SeedLocations(reactors);
+                context.Locations.AddRange(locations);
                 context.SaveChanges();
             }
         }
