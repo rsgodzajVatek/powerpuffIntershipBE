@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PowerPuffBE.Data;
 
@@ -11,9 +12,11 @@ using PowerPuffBE.Data;
 namespace PowerPuffBE.Data.Migrations
 {
     [DbContext(typeof(PowerPuffDbContext))]
-    partial class PowerPuffDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250807100306_AddReactorLocations")]
+    partial class AddReactorLocations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

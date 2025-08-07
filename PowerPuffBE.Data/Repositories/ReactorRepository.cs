@@ -9,6 +9,8 @@ public interface IReactorRepository
     Task<ReactorEntity> GetReactorExtendedById(Guid id);
     Task<IEnumerable<ReactorEntity>> GetReactorImageList();
     Task Update(ReactorEntity reactor);
+    Task<IEnumerable<ReactorLocationsEntity>> GetAllReactorLocations();
+    Task<ReactorLocationsEntity> GetReactorLocationByReactorId(Guid reactorId);
 }
 public class ReactorRepository : IReactorRepository
 {
@@ -46,5 +48,19 @@ public class ReactorRepository : IReactorRepository
     {
         _context.Reactors.Update(reactor);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<ReactorLocationsEntity>> GetAllReactorLocations()
+    {
+        return await _context.ReactorLocations
+            .Include(rl => rl.Reactor) // Include reactor data if needed
+            .ToListAsync();
+    }
+
+    public async Task<ReactorLocationsEntity> GetReactorLocationByReactorId(Guid reactorId)
+    {
+        return await _context.ReactorLocations
+            .Include(rl => rl.Reactor)
+            .FirstOrDefaultAsync(rl => rl.ReactorId == reactorId);
     }
 }
