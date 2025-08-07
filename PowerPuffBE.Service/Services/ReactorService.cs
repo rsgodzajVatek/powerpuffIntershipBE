@@ -28,10 +28,12 @@ public class ReactorService : IReactorService
     }
 
     public async Task<IEnumerable<ReactorDTO>> GetAllReactors(bool extended = false)
-    {
-        var reactors = await _reactorRepository.GetAllReactors(true);
-        return _reactorMapper.MapListToDTO(reactors.ToList());
-    }
+     {
+         var reactors = await _reactorRepository.GetAllReactors(true);
+         return _reactorMapper.MapListToDTO(reactors.ToList());
+     }
+
+
 
     public async Task<ReactorDTO> GetReactorWithDetails(Guid reactorId)
     {
