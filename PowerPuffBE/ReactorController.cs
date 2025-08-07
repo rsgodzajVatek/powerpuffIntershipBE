@@ -28,4 +28,12 @@ public class ReactorController : ControllerBase
         var reactors = await _reactorService.GetReactorWithImageList();
         return reactors;
     }
+
+    [HttpGet]
+    [Route("locations")]
+    public async Task<IEnumerable<ReactorLocationsDTO>> GetReactorLocations()
+    {
+        var locations = await _reactorService.GetReactorsWithLocations();
+        return locations;
+    }
 }
