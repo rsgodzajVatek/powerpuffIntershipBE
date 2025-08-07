@@ -49,4 +49,29 @@ public static class DataSeed
 
         return checksGenerated;
     }
+
+    public static List<ReactorLocationsEntity> SeedLocations(List<ReactorEntity> reactors)
+    {
+
+        var coordinates = new (double Latitude, double Longitude)[]
+        {
+            (52.395157, 21.042438),
+            (53.996468, 15.700077),
+            (51.052330, 17.646745)
+        };
+
+        var locations = new List<ReactorLocationsEntity>();
+
+        for(int i=0; i<reactors.Count && i < coordinates.Length; i++)
+        {
+            locations.Add(new ReactorLocationsEntity
+            {
+                ReactorId = reactors[i].Id,
+                Latitude = coordinates[i].Latitude,
+                Longitude = coordinates[i].Longitude,
+            });
+        }
+
+        return locations;
+    }
 }

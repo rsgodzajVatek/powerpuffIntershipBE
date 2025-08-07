@@ -37,6 +37,13 @@ public static class ServicesContainer
                 context.ReactorProductionChecks.AddRange(productionChecks);
                 context.SaveChanges();
             }
+
+            if(!context.ReactorLocations.Any()){
+                var reactors = context.Reactors.ToList();
+                var locations = DataSeed.SeedLocations(reactors);
+                context.ReactorLocations.AddRange(locations);
+                context.SaveChanges();
+            }
         }
     }
 

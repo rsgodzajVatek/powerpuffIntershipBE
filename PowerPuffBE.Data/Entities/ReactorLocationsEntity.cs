@@ -12,5 +12,5 @@ public class ReactorLocationsEntity : BaseEntity
     
     public double Latitude { get; set; }
 
-    public ReactorEntity? Reactor {get; set;}
+    public virtual ReactorEntity? Reactor {get; set;}
 }

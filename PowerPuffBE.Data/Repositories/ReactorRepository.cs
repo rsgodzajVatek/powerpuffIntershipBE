@@ -53,7 +53,7 @@ public class ReactorRepository : IReactorRepository
     public async Task<IEnumerable<ReactorLocationsEntity>> GetAllReactorLocations()
     {
         return await _context.ReactorLocations
-            .Include(rl => rl.Reactor) // Include reactor data if needed
+            .Include(rl => rl.Reactor) 
             .ToListAsync();
     }
 
